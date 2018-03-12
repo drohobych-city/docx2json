@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.views.SessionDetailsOverview">
+   <children>
+      <TableView prefHeight="400.0" prefWidth="680.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn minWidth="0.0" prefWidth="91.0" text="Прізвище" />
+            <TableColumn prefWidth="108.0" text="Ім'я" />
+            <TableColumn prefWidth="121.0" text="По батькові" />
+            <TableColumn prefWidth="106.0" text="Фракція" />
+            <TableColumn prefWidth="178.0" text="Як голосував" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
