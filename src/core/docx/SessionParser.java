@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class SessionParser {
 
     SessionParser(){
-        /* Парсер налаштований під ключові співпадіння і чітку(незмінну) послідовність стрічок.
+        /* Парсер налаштований під ключові співпадіння і чітку(незмінну) послідовність стрічок. 
         Щоб використовувати його не лише для Дрогобича,
         необхідно дві речі:
         1 - привести файли до вигляду зразка. Виключно формат docx!
@@ -31,10 +31,12 @@ public class SessionParser {
                 String tmp = scanner.nextLine();
                 //
                 if (tmp.contains("Дрогобицька міська рада Львівської області")) {
+                     // назва сесії - після заголовку
                     sessionName = scanner.nextLine();
                 }
                 //
                 if (tmp.contains("РЕЗУЛЬТАТИ ПОІМЕННОГО ГОЛОСУВАННЯ")) {
+                     // наступною стрічкою буде дата
                     tmp = scanner.nextLine();
                     Integer count = 0;
                     String[] allMatches = new String[2];
@@ -58,9 +60,10 @@ public class SessionParser {
     }
     //
     public List<String> getParsedVoteList(String parsedSession){
+        //Розділяємо на окремі голосування
         return Arrays.asList(parsedSession.split("Голова "));
     }
-    //
+    //Один екземпляр голосування в сесії
     public Vote getVote(String parsedVote){
         String voteDate = "";
         String voteName = "";
@@ -69,6 +72,7 @@ public class SessionParser {
             while (scanner.hasNextLine()){
                 String line = scanner.nextLine();
                 if (line.contains("РЕЗУЛЬТАТИ ПОІМЕННОГО ГОЛОСУВАННЯ")) {
+                     // тут беремо дату і час проведення голосування
                     line = scanner.nextLine();
                     Integer count = 0;
                     String[] allMatches = new String[2];
@@ -80,9 +84,12 @@ public class SessionParser {
                         count++;
                     }
                 }
+                 // якщо стрічка містить символи quot -  то це назва голосування   
                 if (line.contains("“") || line.contains("\"")){
                     voteName = voteName+" "+line;
                 }
+                 // прибираємо зайві символи(деколи доводиться ставити ці символи в наступні стрічки, 
+                 //якщо назва не помістилась в одну)
                 voteName = voteName.replace("\"", " ");
                 voteName = voteName.replace("“", "");
                 voteName = voteName.replace("“", "");
@@ -92,6 +99,8 @@ public class SessionParser {
                 Iterator<String> lst_iterator = lst.iterator();
                 while (lst_iterator.hasNext()){
                     String tmp = lst_iterator.next();
+                     // тут вся "магія". Депутати, внесені ручками у файл  DeputySingleton 
+                     // порівнюються із стрічками, котрі у нашому файлі. 
                     for (Deputy deputy : DeputySingleton.getInstance().getDeputies()) {
                         String deputyFullName = deputy.getLastName()+" "+
                                 deputy.getFirstName()+" "+
