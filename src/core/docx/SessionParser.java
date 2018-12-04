@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class SessionParser {
 
     SessionParser(){
-        /*
+        /* Актуально лише для ДМР
         Перед запуском програми:
         При потребі зберегти у docx
         Замінити Мар"янович Мар"янович на Мар'янович
