@@ -59,7 +59,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
         //It`s make JSON array with deputies
         /*DeputyJSON deputyJSON = new DeputyJSON();
         try (FileWriter file = new FileWriter("deputies.json")) {
