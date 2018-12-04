@@ -59,7 +59,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        //It`s make JSON array with deputies
+        //It will make JSON array with deputies
         /*DeputyJSON deputyJSON = new DeputyJSON();
         try (FileWriter file = new FileWriter("deputies.json")) {
             file.write(deputyJSON.getDeputiesJSON().toJSONString());
